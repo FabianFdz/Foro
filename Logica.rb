@@ -29,4 +29,13 @@ class Usuario
 		archivo.puts texto
 		archivo.close
 	end
+
+	def user_existe(user)
+		for i in $users_registrados
+			if i.user == user
+				return "SI"
+			end
+		end
+		"NO"
+	end
 end

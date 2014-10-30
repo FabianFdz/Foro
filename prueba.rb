@@ -12,6 +12,13 @@ get '/registrar/:name' do #recibe usuario-contrasenna. Ejm: fdz-123
   "Registro exitoso para #{params[:name]}! (User-Pass)"
 end
 
+get '/existe/:name' do #recibe usuario-contrasenna. Ejm: fdz-123
+  # matches "GET /hello/foo" and "GET /hello/bar"
+  # params[:name] is 'foo' or 'bar'
+  res = Usuario.user_existe(params[:name])
+  "Usuario #{res} existe!"
+end
+
 # Investigar manejo de archivos .txt en Ruby
 # Implementar para registrar (/usuario-contrasenna)
 # => Debe verificar que el usuario no exista
