@@ -2,7 +2,7 @@ require 'sinatra'
 require "./Logica.rb"
 
 get '/' do
-	"Hello World!"
+	"Foro FdzCM!"
 end
 
 get '/registrar/:name' do #recibe usuario-contrasenna. Ejm: fdz-123
