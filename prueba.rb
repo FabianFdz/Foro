@@ -2,6 +2,7 @@ require 'sinatra'
 require "./Logica.rb"
 
 get '/' do
+	Usuario.cargar_txt
 	"Foro FdzCM!"
 end
 
