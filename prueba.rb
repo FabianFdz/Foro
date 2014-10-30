@@ -1,14 +1,15 @@
 require 'sinatra'
-require 'haml' #Se tuvo que instalar
+require "./Logica.rb"
 
 get '/' do
 	"Hello World!"
 end
 
-get '/hello/:name' do #recibe usuario-contrasenna. Ejm: fdz-123
+get '/registrar/:name' do #recibe usuario-contrasenna. Ejm: fdz-123
   # matches "GET /hello/foo" and "GET /hello/bar"
   # params[:name] is 'foo' or 'bar'
-  "Hello #{params[:name]}!"
+  Usuario.registra_user(params[:name])
+  "Registro exitoso para #{params[:name]}! (User-Pass)"
 end
 
 # Investigar manejo de archivos .txt en Ruby
@@ -26,3 +27,4 @@ end
 # Para que una pregunta reciba una respuesta se recibe lo siguiente usuario_pregunta-pregunta-usuario_responde-respuesta
 # Cada respuesta se almacena al final del documento
 # Cuando se va a devolver de la mas reciente a la mas antigua se saca de abajo para arriba (Se lee normal pero se le da vuelta a la lista)
+
