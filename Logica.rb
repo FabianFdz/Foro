@@ -7,6 +7,10 @@ class Usuario
 		@preguntas = []
 	end
 
+	def getUser()
+		@user
+	end
+
 	def self.cargar_txt() # => Carga los usuarios a memoria en caso de cierre de programa
 		archivo = File.new("users.txt","a+") #Abre el archivo "users", si no existe lo crea
 		archivo.rewind #Vamos a la primera linea del archivo
@@ -30,11 +34,13 @@ class Usuario
 		archivo.close
 	end
 
-	def user_existe(user)
-		for i in $users_registrados
-			if i.user == user
+	def self.user_existe(user)
+		cont = 0
+		while cont < $users_registrados.length
+			if $users_registrados[cont].getUser == user
 				return "SI"
 			end
+			cont = cont + 1
 		end
 		"NO"
 	end
