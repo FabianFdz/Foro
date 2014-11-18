@@ -47,9 +47,9 @@ class Usuario
 			archivo = File.new("users.txt","a+") #Abre el archivo "users", si no existe lo crea
 			archivo.puts texto
 			archivo.close
-			return "Registro existoso"
+			return true
 		else
-			return "Usuario existe"
+			return false
 		end
 	end
 
@@ -89,6 +89,7 @@ class Pregunta
 		@IDPregunta = $ID + 1
 		@ObjPregunta = preg
 		@ObjRes = []
+		@tags = []
 	end
 	
 	def self.listaPreguntas

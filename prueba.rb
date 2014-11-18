@@ -11,12 +11,11 @@ end
 ####################Modulo de Registro y Login###############################
 
 get '/registrar/:name' do #recibe usuario-contrasenna. Ejm: fdz-123
-	res = {}
   	res = Usuario.registra_user(params[:name])
-  	"#{res} para #{params[:name]}! (User-Pass)"
+  	"#{res}"
 end
 
-get '/existe/:name' do #recibe usuario. Ejm: fdz
+get '/existe/:name' do #recibe usuario. Ejm: fdz link/existe/pacm
   	# if Usuario.user_existe(params[:name]) == true
   	# 	return "Usuario si existe!"
   	# end
@@ -32,10 +31,14 @@ end
 
 get '/users' do
 	response = {}
-	while condition
-		response[:user] = 
+	cont = 0
+	while cont < $users_registrados.length
+		response[:user] = $users_registrados[cont].getUser
+		response[:pass] = $users_registrados[cont].getPass
+		cont = cont + 1
 	end
-	return "#{$users_registrados}"
+	return $users_registrados.to_json
+	#return response.to_json
 end
 
 ##############################################################################
