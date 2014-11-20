@@ -108,7 +108,7 @@ class Pregunta##################################################################
 		@ObjRes[@ObjRes.length] = res
 	end
 
-	def agregaTag(tag)
+	def agregaTag(tag) #
 		@tags[@tags.length] = tag
 	end
 

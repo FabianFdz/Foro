@@ -16,12 +16,6 @@ get '/registrar/:name' do #recibe usuario-contrasenna. Ejm: fdz-123
 end
 
 get '/existe/:name' do #recibe usuario. Ejm: fdz link/existe/pacm
-  	# if Usuario.user_existe(params[:name]) == true
-  	# 	return "Usuario si existe!"
-  	# end
-  	# if Usuario.user_existe(params[:name]) == false
-  	# 	return "Usuario no existe!"
-  	# end
   	return "#{Usuario.user_existe(params[:name])}"
 end
 
@@ -29,22 +23,11 @@ get '/login/:user_pass' do #recibe usuario-contrasenna. Ejm: fdz-123
   	return "#{Usuario.LogUser(params[:user_pass])}"
 end
 
-get '/users' do
-	response = {}
-	cont = 0
-	while cont < $users_registrados.length
-		response[:user] = $users_registrados[cont].getUser
-		response[:pass] = $users_registrados[cont].getPass
-		cont = cont + 1
-	end
-	return $users_registrados.to_json
-	#return response.to_json
-end
-
 ##############################################################################
 
 get '/C-pregunta/:user_preg' do #Crea una pregunta user-preg
-	"#{Pregunta.crearPregunta(params[:user_preg])}"
+	parametro = :user_preg.split("-")
+	"#{Pregunta.crearPregunta(parametro[1],parametro[0])}"
 end
 
 get '/R-pregunta/:res_idpreg_user' do #Responde una pregunta res-id-user
@@ -57,12 +40,12 @@ get '/todas_preguntas' do #Devuelve todas las preguntas
 end
 
 get '/agrega_tag/:tag_id' do #Agrega tag a una pregunta
-	parametro = :tag_id.split("-")
+	parametro = params[:tag_id].split("-")
 	return "#{Pregunta.(parametro[0],parametro[1])}"
 end
 
 get '/respuestas_de/:id' do #Agrega tag a una pregunta
-	return "#{Respuesta.listaRespuestas(:id)}"
+	return "#{Respuesta.listaRespuestas(params[:id])}"
 end
 
 ## Implementar para registrar (/usuario-contrasenna) 
