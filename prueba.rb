@@ -1,6 +1,5 @@
 require 'sinatra'
 require "./Logica.rb"
-require 'json'
 
 Usuario.cargar_txt
 
@@ -26,12 +25,12 @@ end
 ##############################################################################
 
 get '/C-pregunta/:user_preg' do #Crea una pregunta user-preg
-	parametro = :user_preg.split("-")
+	parametro = params[:user_preg].split("-")
 	"#{Pregunta.crearPregunta(parametro[1],parametro[0])}"
 end
 
 get '/R-pregunta/:res_idpreg_user' do #Responde una pregunta res-id-user
-	parametro = :user_preg.split("-")
+	parametro = params[:user_preg].split("-")
 	"#{Respuesta.responde_pregunta(parametro[0],parametro[1],parametro[2])}"
 end
 
@@ -46,6 +45,10 @@ end
 
 get '/respuestas_de/:id' do #Agrega tag a una pregunta
 	return "#{Respuesta.listaRespuestas(params[:id])}"
+end
+
+get '/preguntas_de/:user' do #Agrega tag a una pregunta
+	return "#{Pregunta.preguntasUser(params[:user])}"
 end
 
 ## Implementar para registrar (/usuario-contrasenna) 

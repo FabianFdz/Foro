@@ -131,7 +131,7 @@ class Pregunta##################################################################
 		res = "%%%"
 		cont = 0
 		while $all_preguntas.length > cont
-			if $all_preguntas[cont].getUser = user
+			if $all_preguntas[cont].getUser() == user
 				res = "#{res}/%/#{$all_preguntas[cont].getID()}/%/#{$all_preguntas[cont].getPregunta()}"
 			end
 			cont+=1
@@ -146,7 +146,7 @@ class Pregunta##################################################################
 	def self.agregaTagPregunta(tag,id)
 		cont = 0
 		while $all_preguntas.length > cont
-			if $all_preguntas[cont].getID = id
+			if $all_preguntas[cont].getID() == id
 
 				res = "#{res}/%/#{$all_preguntas[cont].getID()}/%/#{$all_preguntas[cont].getPregunta()}"
 			end
@@ -172,7 +172,7 @@ class Respuesta#################################################################
 	def self.responde_pregunta(res,id,user)
 		cont = 0
 		while cont < $all_preguntas.length
-			if id = $all_preguntas[cont].getID
+			if id == $all_preguntas[cont].getID()
 				$all_preguntas[cont].setRes(Respuesta.new(res,user))
 			end
 			cont+=1
@@ -183,7 +183,7 @@ class Respuesta#################################################################
 		cont = 0
 		str = "%%%" #separador de preguntas
 		while cont < $all_preguntas.length
-			if id = $all_preguntas[cont].getID
+			if id == $all_preguntas[cont].getID()
 				l_res = $all_preguntas[cont].getRes
 				cont = 0
 				while l_res.length > cont
