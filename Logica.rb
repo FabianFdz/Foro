@@ -127,7 +127,7 @@ class Pregunta##################################################################
 		$all_preguntas[$all_preguntas.length] = res
 	end
 
-	def preguntasUser(user)
+	def self.preguntasUser(user)
 		res = "%%%"
 		cont = 0
 		while $all_preguntas.length > cont
@@ -139,11 +139,11 @@ class Pregunta##################################################################
 		res
 	end
 
-	def borrarPregunta(id)
+	def self.borrarPregunta(id)
 		$all_preguntas.delete(id)
 	end
 
-	def agregaTagPregunta(tag,id)
+	def self.agregaTagPregunta(tag,id)
 		cont = 0
 		while $all_preguntas.length > cont
 			if $all_preguntas[cont].getID = id
