@@ -116,7 +116,7 @@ class Pregunta##################################################################
 		cont = 0
 		str = "%%%" #separador de preguntas
 		while cont < $all_preguntas.length
-			str = "#{str}/%/#{$all_preguntas[cont].getID()}/%/#{$all_preguntas[cont].getPregunta()}/%/#{$all_preguntas[cont].getTags()}"
+			str = "#{str}/%/#{$all_preguntas[cont].getID()}/%/#{$all_preguntas[cont].getPregunta()}"
 			cont+=1
 		end
 		str
