@@ -2,11 +2,10 @@ $users_registrados = [] #lista que contiene objetos tipo Usuario
 $all_preguntas = [] #lista de preguntas de todos los usuarios
 $ID = 0 #ID de preguntas
 
-class Usuario
+class Usuario#############################################################################################################
 	def initialize(user,pass) # Constructor de Usuario
 		@user = user # Usuario
 		@pass = pass # Contrasenha
-		@preguntas = [] # Preguntas que ha hecho
 	end
 
 	def getUser() # Obtiene User de objeto Usuario
@@ -19,10 +18,6 @@ class Usuario
 
 	def self.getUsuarios()
 		$users_registrados
-	end
-
-	def agregaPregunta(pregunta)
-		@preguntas[@preguntas.length] = pregunta
 	end
 
 	def self.cargar_txt() # => Carga los usuarios a memoria en caso de cierre de programa
@@ -84,19 +79,121 @@ class Usuario
 	end
 end
 
-class Pregunta
-	def initialize(preg)
+class Pregunta############################################################################################################
+	def initialize(preg,user)
 		@IDPregunta = $ID + 1
 		@ObjPregunta = preg
 		@ObjRes = []
 		@tags = []
-	end
-	
-	def self.listaPreguntas
-		return $all_preguntas
+		@user = user
 	end
 
-	def self.crearPregunta(preg)
-		
+	def getID()
+		@IDPregunta
+	end
+
+	def getPregunta()
+		@ObjPregunta
+	end
+
+	def getRes()
+		@ObjRes
+	end
+
+	def getUser()
+		@user
+	end
+
+	def setRes(res)
+		@ObjRes[@ObjRes.length] = res
+	end
+
+	def agregaTag(tag)
+		@tags[@tags.length] = tag
+	end
+
+	def self.listaPreguntas()
+		cont = 0
+		str = "%%%" #separador de preguntas
+		while cont < $all_preguntas.length
+			str = "#{str}/%/#{$all_preguntas[cont].getID()}/%/#{$all_preguntas[cont].getPregunta()}/%/#{$all_preguntas[cont].getTags()}"
+			cont+=1
+		end
+		str
+	end
+
+	def self.crearPregunta(preg,user)
+		res = Pregunta.new(preg,user)
+		$all_preguntas[$all_preguntas.length] = res
+	end
+
+	def preguntasUser(user)
+		res = "%%%"
+		cont = 0
+		while $all_preguntas.length > cont
+			if $all_preguntas[cont].getUser = user
+				res = "#{res}/%/#{$all_preguntas[cont].getID()}/%/#{$all_preguntas[cont].getPregunta()}"
+			end
+			cont+=1
+		end
+		res
+	end
+
+	def borrarPregunta(id)
+		$all_preguntas.delete(id)
+	end
+
+	def agregaTagPregunta(tag,id)
+		cont = 0
+		while $all_preguntas.length > cont
+			if $all_preguntas[cont].getID = id
+
+				res = "#{res}/%/#{$all_preguntas[cont].getID()}/%/#{$all_preguntas[cont].getPregunta()}"
+			end
+			cont+=1
+		end
+	end
+end
+
+class Respuesta###########################################################################################################
+	def initialize(res,user)
+		@respuesta = res
+		@user = user
+	end
+
+	def getRes()
+		@respuesta
+	end
+
+	def getUser()
+		@user
+	end
+	
+	def self.responde_pregunta(res,id,user)
+		cont = 0
+		while cont < $all_preguntas.length
+			if id = $all_preguntas[cont].getID
+				$all_preguntas[cont].setRes(Respuesta.new(res,user))
+			end
+			cont+=1
+		end 
+	end
+
+	def self.listaRespuestas(id)
+		cont = 0
+		str = "%%%" #separador de preguntas
+		while cont < $all_preguntas.length
+			if id = $all_preguntas[cont].getID
+				l_res = $all_preguntas[cont].getRes
+				cont = 0
+				while l_res.length > cont
+					str = "#{str}%%%#{l_res[cont].getUser}/%/#{l_res[cont].getRes()}"
+					cont+=1
+				end
+				return str
+			end
+			cont+=1
+		end
+		str
 	end
 end

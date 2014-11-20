@@ -43,11 +43,22 @@ end
 
 ##############################################################################
 
-get '/C-pregunta/:user_preg' do
+get '/C-pregunta/:user_preg' do #Crea una pregunta user-preg
 	"#{Pregunta.crearPregunta(params[:user_preg])}"
 end
 
+get '/R-pregunta/:res_idpreg_user' do #Responde una pregunta res-id-user
+	parametro = :user_preg.split("-")
+	return "#{Respuesta.responde_pregunta(parametro[0],parametro[1],parametro[2])}"
+end
 
+get '/todas_preguntas' do #Devuelve todas las preguntas
+	return "#{Pregunta.listaPreguntas()}"
+end
+
+get '/todas_res/:id' do #Devuelve todas las respuestas de una pregunta(id)
+	return "#{Pregunta.listaPreguntas()}"
+end
 
 ## Implementar para registrar (/usuario-contrasenna) 
 ## => Debe verificar que el usuario no exista
